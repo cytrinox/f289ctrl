@@ -2,7 +2,7 @@ use self::response::Response;
 
 pub mod codec;
 pub mod command;
-pub mod device;
+pub mod conv;
 pub mod response;
 
 #[cfg(test)]
@@ -25,7 +25,7 @@ pub enum ProtoError {
     #[error("Connection was closed")]
     Abort,
     #[error("Unexpected response: {:?}", _0)]
-    Unexpected(Response),
+    Unexpected(Box<Response>),
 }
 
 impl From<Response> for ProtoError {
@@ -33,8 +33,8 @@ impl From<Response> for ProtoError {
         match value {
             Response::SyntaxError => Self::SyntaxError,
             Response::ExecutionError => Self::ExecutionError,
-            Response::Success(_) => Self::Unexpected(value),
-            Response::NoData => Self::Unexpected(value),
+            Response::Success(_) => Self::Unexpected(value.into()),
+            Response::NoData => Self::Unexpected(value.into()),
         }
     }
 }

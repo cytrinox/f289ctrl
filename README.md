@@ -1,2 +1,2 @@
 # f289ctrl
-Fluke 289 control and configuration utility
+Communication library for Fluke 289 digital multimeter
