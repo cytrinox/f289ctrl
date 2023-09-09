@@ -5,10 +5,10 @@ use clap::builder::BoolishValueParser;
 use clap::{arg, command, value_parser};
 use f289ctrl::device::ValueMaps;
 use f289ctrl::measurement::Reading;
-use f289ctrl::{proto, DEFAULT_TTY, DEFAULT_BAUDRATE};
 use f289ctrl::proto::command::{
     ClearMemory, DateFormat, DezibelReference, DigitCount, Language, NumericFormat, TimeFormat,
 };
+use f289ctrl::{proto, DEFAULT_BAUDRATE, DEFAULT_TTY};
 use std::io::{ErrorKind, Write};
 use std::process::exit;
 use std::{env, path::PathBuf, str, time::Duration};
@@ -20,8 +20,6 @@ use f289ctrl::measurement::{
 };
 use f289ctrl::proto::conv::pretty_ts;
 use f289ctrl::proto::Result;
-
-
 
 #[tokio::main]
 async fn main() -> tokio_serial::Result<()> {
